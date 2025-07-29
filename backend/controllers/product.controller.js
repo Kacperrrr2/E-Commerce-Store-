@@ -2,6 +2,18 @@ import { redis } from "../lib/redis.js";
 import cloudinary from "../lib/cloudinary.js";
 import Product from "../models/product.model.js";
 
+
+
+export const getAllProducts = async (req, res) => {
+	try {
+		const products = await Product.find({}); // find all products
+		res.json({ products });
+	} catch (error) {
+		console.log("Error in getAllProducts controller", error.message);
+		res.status(500).json({ message: "Server error", error: error.message });
+	}
+};
+
 export const getCartProducts = async (req, res) => {
 	try {
 		const products = await Product.find({ _id: { $in: req.user.cartItems } });
@@ -23,6 +35,7 @@ export const getFeaturedProducts = async (req, res) => {
 	try {
 		let featuredProducts = await redis.get("featured-products")
 		if (featuredProducts) {
+			console.log("FEATURED NOW:", product.isFeatured);
 			return res.json(JSON.parse(featuredProducts))
 		}
 		featuredProducts = await Product.find({ isFeatured: true }).lean();
@@ -112,7 +125,7 @@ export const getProductsByCategory = async (req, res) => {
 	const category = req.params.category;
 	try {
 		const products = await Product.find({ category })
-		res.json(products);
+		res.json({products});
 
 	} catch (error) {
 		console.log("Error in getProductsByCategory controller", error.message);
