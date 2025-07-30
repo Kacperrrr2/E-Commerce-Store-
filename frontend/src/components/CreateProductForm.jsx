@@ -13,12 +13,12 @@ const CreateProductForm = () => {
     });
     const {createProduct,loading} =useProductStore()
     const categories = ["jeans",
-        "t-shirt",
+        "t-shirts",
         "shoes",
         "glasses",
-        "jacket",
-        "suit",
-        "bag"
+        "jackets",
+        "suits",
+        "bags"
 
     ]
 

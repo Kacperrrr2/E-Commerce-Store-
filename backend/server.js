@@ -20,7 +20,7 @@ app.use(express.json({limit: "10mb"}))
 app.use(cookieParser()) 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
-app.use("/api/carts", cardRoutes);
+app.use("/api/cart", cardRoutes);
 app.use("/api/coupons", couponRoutes);  
 app.use("/api/payments", paymentRoutes);  
 app.use("/api/analytics", analyticsRoutes);
