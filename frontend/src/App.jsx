@@ -23,7 +23,9 @@ function App() {
   }, [checkAuth]);
 
   useEffect(() => {
-    getCartItems()
+    if(user){
+      getCartItems()
+    }
   }, [getCartItems]);
   if (checkingAuth) { <LoadingSpinner /> }
   return (
